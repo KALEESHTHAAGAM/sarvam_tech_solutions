@@ -22,11 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-5fb8(b7zq*6=fldj=09$tl@bixqi57h1=($!o-nep^k*up@(7-'
 
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "default-secret-key")
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["sarvam-tech-solutions.onrender.com"]
+ALLOWED_HOSTS = ["sarvam-tech-solutions.onrender.com",
+                 "127.0.0.1"]
 
+WHITENOISE_MANIFEST_STRICT = False
 
 # Application definition
 
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'website',
+    'whitenoise.runserver_nostatic'
 ]
 
 MIDDLEWARE = [
@@ -48,7 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+   
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
 ROOT_URLCONF = 'sarvam_tech_solutions.urls'
 
@@ -116,9 +124,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-STATIC_URL = "/static/"
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
