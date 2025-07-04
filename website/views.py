@@ -11,6 +11,9 @@ def service_details(request):
     return render(request, "service-details.html")
 def projects(request):
     return render(request, "project.html")
+
+def product_details(request):
+    return render(request, "project-details.html")
    
 def blog(request):
     return render(request, "news-standard.html")

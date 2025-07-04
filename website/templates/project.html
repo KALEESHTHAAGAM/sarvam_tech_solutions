@@ -8,7 +8,7 @@
 
 
         <!--<< Breadcrumb Section Start >>-->
-        <div class="breadcrumb-wrapper bg-cover" style="background-image: url('assets/img/breadcrumb.jpg');">
+        <!-- <div class="breadcrumb-wrapper bg-cover" style="background-image: url('assets/img/breadcrumb.jpg');">
             <div class="border-shape">
                 <img src="{% static 'assets/img/element.png' %}" alt="shape-img">
             </div>
@@ -33,7 +33,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- Project Section Start -->
         <section class="project-section section-padding fix">
@@ -54,12 +54,13 @@
                     </div>
                     <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
                         <div class="project-items">
-                            <div class="project-image">
+                            <div class="project-image" >
+                                <a href="{% url 'product_details' %}">  </a>
                                 <img src="{% static 'assets/img/project/02.jpg' %}" alt="project-img">
                                 <div class="project-content">
                                     <p>Security</p>
                                     <h4>
-                                        <a href="project-details.html">GroceryPlus</a>
+                                        <a href="{% url 'product_details' %}">GroceryPlus</a>
                                     </h4>
                                 </div>
                             </div>
